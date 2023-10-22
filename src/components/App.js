@@ -8,6 +8,7 @@ import Question from "./Question";
 import NextButton from "./NextButton";
 import Progress from "./Progress";
 import FinishScreen from "./FinishScreen";
+import RestartButton from "./RestartButton";
 
 function reducer(state, action) {
   switch (action.type) {
@@ -37,6 +38,8 @@ function reducer(state, action) {
         highScore:
           state.points > state.highScore ? state.points : state.highScore,
       };
+    case "restart":
+      return { ...initialState, status: "ready", questions: state.questions };
     default:
       throw new Error("Uknown action");
   }
@@ -49,7 +52,7 @@ const initialState = {
   index: 0,
   answer: null,
   points: 0,
-  highScore: null,
+  highScore: 0,
 };
 
 export default function App() {
@@ -98,7 +101,14 @@ export default function App() {
           </>
         )}
         {status === "finished" && (
-          <FinishScreen points={points} maxPoints={maxPoints} highScore={highScore}/>
+          <>
+            <FinishScreen
+              points={points}
+              maxPoints={maxPoints}
+              highScore={highScore}
+            />
+            <RestartButton dispatch={dispatch} />
+          </>
         )}
       </Main>
     </div>
