@@ -6,6 +6,7 @@ import Error from "./Error";
 import StartScreen from "./StartScreen";
 import Question from "./Question";
 import NextButton from "./NextButton";
+import Progress from "./Progress";
 
 function reducer(state, action) {
   switch (action.type) {
@@ -43,7 +44,7 @@ const initialState = {
 };
 
 export default function App() {
-  const [{ questions, status, index, answer }, dispatch] = useReducer(
+  const [{ questions, status, index, answer, points }, dispatch] = useReducer(
     reducer,
     initialState
   );
@@ -68,6 +69,13 @@ export default function App() {
         )}
         {status === "active" && (
           <>
+            <Progress
+              index={index}
+              numQuestions={numQuestions}
+              questions={questions}
+              points={points}
+              answer={answer}
+            />
             <Question
               question={questions[index]}
               dispatch={dispatch}
