@@ -1,4 +1,7 @@
-function RestartButton({ dispatch }) {
+import { useQuiz } from "../context/QuizProvider";
+
+function RestartButton() {
+  const { dispatch } = useQuiz();
   return (
     <button
       className="btn btn-ui"
