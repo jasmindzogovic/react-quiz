@@ -4,6 +4,16 @@ const QuizContext = createContext();
 
 const SECS_PER_QUESTION = 30;
 
+const initialState = {
+  questions: [],
+  status: "loading",
+  index: 0,
+  answer: null,
+  points: 0,
+  highScore: 0,
+  secondsRemaining: null,
+};
+
 function reducer(state, action) {
   switch (action.type) {
     case "dataReceived":
@@ -49,15 +59,6 @@ function reducer(state, action) {
   }
 }
 
-const initialState = {
-  questions: [],
-  status: "loading",
-  index: 0,
-  answer: null,
-  points: 0,
-  highScore: 0,
-  secondsRemaining: null,
-};
 
 function QuizProvider({ children }) {
   const [
